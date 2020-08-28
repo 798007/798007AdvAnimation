@@ -1,0 +1,35 @@
+#header{
+  background-color: pink;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  font-size: 400%;
+}
+
+.Divs{
+  background-color: lightgreen;
+  text-align: center;
+  border: 10px outset blue;
+  width: 500px;
+  height: 550px;
+  margin: 0 auto;
+}
+
+h2 {color:purple;
+    font-size: 200%;
+    text-align: center;
+   }
+
+body {background-color: powderblue;}
+p {font-family: fantasy;}
+
+a {text-align: center;
+   color: blue;
+   font-size: 175%;
+ }
+
+img{
+     width: 400px;
+     height: 400px;
+   }
+}
