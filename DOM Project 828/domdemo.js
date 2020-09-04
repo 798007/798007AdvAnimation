@@ -1,21 +1,35 @@
-window.onload = examples;// notice no quotes or parentheses
-  function examples(){
+window.onload = init;
+var canvas;  //  This variable will hold a reference to the Canvas
+var ctx;     //  ctx will hold a reference to our context
 
-// create a couple of elements in an otherwise empty HTML page
-  var heading = document.createElement("h1");
-  var heading_text = document.createTextNode("Big Head!");
+function init(){
+  //get the canvas
+  canvas= document.getElementById('cnv');
+  // Set the dimensions of the canvas
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.border = 'solid black 2px';
+  canvas.style.backgroundColor = 'rgba(0,44,55, .5)';
 
-// places heading in node tree as child of body
-  document.body.appendChild(heading);
+}
 
-// places heading_text in node tree as child of heading
-  heading.appendChild(heading_text);
+function draw() {
+  var elem = document.getElementById("animate");
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos > 350) {
+      pos = 0;
+    } else {
+      pos++;
+      elem.style.top = pos + "px";
+      elem.style.left = pos + "px";
+    }
+  }
 }
 
 
-
-function styleCanv(){
-};
-
-function addElement () {
- };
+function animate(){
+ requestAnimationFrame(animate);
+ ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
+}
