@@ -1,7 +1,6 @@
 var canvas;
 var ctx;
 var ball;
-var balls = [];
 //  intialize the Canvas and context
 window.onload = init;
 
