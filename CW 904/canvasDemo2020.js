@@ -1,8 +1,7 @@
 var canvas;
 var ctx;
-var ball;
-var balls = [];
-var x, y, dx, dy, radius;
+var ballArr = [];
+
 //  intialize the Canvas and context
 window.onload = init;
 
@@ -16,41 +15,60 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  loadBalls(10);
+  loadBalls(100);
   animate();
 }
 
-function animate(){
-  for(var i = 0; i < balls.length; i++){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    ctx.strokeStyle = 'rgba(155,180,50)';
-    ctx.fillStyle = 'rgba(155,180, 50)';
-    ctx.beginPath();
-    ctx.arc(balls[i].x,balls[i].y,balls[i].radius, Math.PI*2, 0, false);
-    ctx.fill();
-    ctx.stroke();
-    balls[i].x+= balls[i].dx;
-    balls[i].y+= balls[i].dy;
-    if(balls[i].x > window.innerWidth || balls[i].x < 0)  balls[i].dx = -balls[i].dx;
-    if(balls[i].y > window.innerHeight || balls[i].y < 0)  balls[i].dy = -balls[i].dy;
-  }
-  requestAnimationFrame(animate);
-}
-
-function Ball(x, y, dx, dy, radius){
+function Ball(x, y, dx, dy, radius, color){
   this.x = x;
   this.y = y;
   this.dx = dx;
   this.dy = dy;
   this.radius = radius;
-}
+  var red = Math.floor(Math.random()*255);
+  var green = Math.floor(Math.random()*255);
+  var blue = Math.floor(Math.random()*255);
+  this.color = 'rgba('+red+', '+green+', '+blue+')';
 
-function loadBalls(number){
-  for(var i=0; i < number; i++){
-    balls[i] = new Ball(Math.random()*window.innerWidth, Math.random()*window.innerHeight, Math.random()*10 - 5, Math.random()*10 - 5, 30);
+  this.run = function(){
+    this.update();
+    this.render();
+  }
+
+  this.update = function(){
+    this.x += this.dx;
+    this.y += this.dy;
+    if(this.x > window.innerWidth || this.x < 0) this.dx = -this.dx;
+    if(this.y > window.innerHight || this.y < 0) this.dy = -this.dy;
+  }
+
+  this.render = function(){
+    //ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.strokeStyle = this.color;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.radius, Math.PI*2, 0, false);
+    ctx.fill();
+    ctx.stroke();
   }
 }
 
-Ball.prototype.getDiameter = function(){
-  return this.radius*2;
+function animate(){
+  for(var i = 0; i < ballArr.length; i++){
+    ballArr[i].run();
+  }
+  requestAnimationFrame(animate);
+}
+
+
+
+function loadBalls(number){
+  for(var i=0; i < number; i++){
+    var x = Math.random()*window.innerWidth;
+    var y= Math.random()*window.innerHeight;
+    var dx = Math.random()*10 - 5;
+    var dy = Math.random()*10 - 5;
+    var radius = 15;
+    ballArr[i] = new Ball(x, y, dx, dy, radius);
+  }
 }
