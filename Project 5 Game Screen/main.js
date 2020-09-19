@@ -9,6 +9,8 @@ window.onload = init;
 function init(){
   //get the canvas
   canvas = document.getElementById('cnv');
+  canvas.width = 900;
+  canvas.height = 600;
   canvas.style.border = 'solid black 2px';
   canvas.style.backgroundColor = 'black';
   // get the context
