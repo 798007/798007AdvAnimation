@@ -2,10 +2,14 @@ function GameArea(){
     //  Wrapper Div
     this.wrapperDiv = document.getElementById("wrapperDiv");
     this.wrapperDiv.setAttribute("style", " background-color: yellow; border: solid black 5 px; width:900px; height:800px;");
-    // create tileMenuDiv
-    this.tileMenuDiv = document.createElement("div");
-    this.wrapperDiv.appendChild(this.tileMenuDiv);
-    this.tileMenuDiv.setAttribute("style", "background-color: white; width:900px; height:100px; float:left");
+    //tileMenuDiv
+    var tileMenu = document.getElementbyId('tileMenuDiv');
+    this.tileMenuDiv.setAttribute("style", "background-color: white; width:900px; height:100px; float:right");
+    //4 tiles divs
+    for(var i = 0; i<4; i++){
+      tiles[i]=this.tileDiv=document.getElementbyId("tileDiv");
+      this.wrapperDiv.appendChild(this.tileMenuDiv);
+    }
 
 
 for(let i = 0; i < this.tiles.length; i++){
@@ -26,3 +30,4 @@ for(let i = 0; i < this.tiles.length; i++){
         console.log("Mouse Clicked");
     },false);
                                         }
+}

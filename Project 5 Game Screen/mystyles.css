@@ -8,7 +8,7 @@ body{
  margin:auto;
  margin-top: 20px;
 }
-.tile{   // class tile
+#tileDiv{   // class tile
   float:right;
   padding:30px;
   width:40px;
@@ -22,7 +22,7 @@ body{
   border: solid black 2px;
 }
 
-.tileMenuDiv{
+#tileMenuDiv{
   float: right;
   background-color: white;
   width:auto;
