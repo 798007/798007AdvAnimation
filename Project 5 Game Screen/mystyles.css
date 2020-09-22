@@ -2,12 +2,20 @@ body{
    background-color: #36d9d9;
    margin:0;
  }
-#wrapperDiv{  id wrapperDiv
+
+/* #wrapperDiv{  id wrapperDiv
  height: 800px;
  width: 900px;
  margin:auto;
- margin-top: 20px;
+ /* margin-top: 20px; */
+} */
+
+#buttonMenuDiv{
+  height: 200px;
+  width: 900px;
+  background-color: lightgreen;
 }
+
 #tileDiv{   // class tile
   float:right;
   padding:30px;
