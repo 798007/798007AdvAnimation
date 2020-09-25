@@ -1,33 +1,35 @@
 var canvas;
 var ctx;
 var game;
-//var ballArr = [];
+var ballArr = [];
 
 //  intialize the Canvas and context
 window.onload = init;
 
 function init(){
+  game = new Game();
   //get the canvas
   canvas = document.getElementById('cnv');
   //canvas.width = 900;
   //canvas.height = 600;
-  canvas.style.border = 'solid black 2px';
-  canvas.style.backgroundColor = 'black';
-  canvas.style.float = 'left';
-  
+  // canvas.style.border = 'solid black 2px';
+  // canvas.style.backgroundColor = 'black';
+  // canvas.style.float = 'left';
+
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  game = new Game()
   //loadBalls(100);
   animate();
   //GameArea();
 }
 
 function animate(){
-  requestAnimationFrame(animate);
   ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-  game.update();
+  //game.update();
+  requestAnimationFrame(animate);
 }
+
+
 
 
 
