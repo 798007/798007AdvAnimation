@@ -3,12 +3,12 @@ body{
    margin:0;
  }
 
-/* #wrapperDiv{  id wrapperDiv
+#wrapperDiv{
  height: 800px;
  width: 900px;
  margin:auto;
  /* margin-top: 20px; */
-} */
+}
 
 #buttonMenuDiv{
   height: 200px;
@@ -16,15 +16,27 @@ body{
   background-color: lightgreen;
 }
 
-#tileDiv{   // class tile
+#buttonDiv{
+  height: 100px;
+  width: 100px;
+  background-color: powderblue;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 50px;
+  /* margin-bottom: 100px; */
+  float: left;
+
+}
+
+#tileDiv{
   float:right;
   padding:30px;
-  width:40px;
-  height:35px;
+  width:30px;
+  height:30px;
   margin-left: 50px;
   margin-right: 50px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   background-color: purple;
   border-radius: 100%;
   border: solid black 2px;
@@ -33,7 +45,7 @@ body{
 #tileMenuDiv{
   float: right;
   background-color: white;
-  width:auto;
-  height:auto;
+  width:204px;
+  height:600px;
   border: solid black 2px;
 }
