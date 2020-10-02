@@ -2,7 +2,7 @@
 function Bubble(x, y, dx, dy, rad, clr){
     this.location = new JSVector(x, y);
     this.velocity = new JSVector(dx, dy);
-  
+
     this.rad = rad;///2;
     this.clr = clr;
     this.isOverlapping = false;
@@ -69,8 +69,8 @@ Bubble.prototype.update = function(){
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Bubble.prototype.checkEdges = function(){
     let canvas = game.canvas;
-    if(this.x > canvas.width)  this.x = 0; // wrap around from right to left
-    if(this.x < 0)  this.x = canvas.width; // wrap around from left to right
-    if(this.y > canvas.height)  this.y = 0; // wrap around from bottom to top
-    if(this.y < 0)  this.y = canvas.height; // wrap around from top to bottom
+    if(this.location.x > canvas.width)  this.location.x = 0; // wrap around from right to left
+    if(this.location.x < 0)  this.location.x = canvas.width; // wrap around from left to right
+    if(this.location.y > canvas.height)  this.location.y = 0; // wrap around from bottom to top
+    if(this.location.y < 0)  this.location.y = canvas.height; // wrap around from top to bottom
   }
