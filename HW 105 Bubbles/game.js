@@ -9,13 +9,13 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    //   create the array of bubble objects
-    this.bubbles = [];
+    //   create the array of Mover objects
+    this.movers = [];
 
-    //create attractor bubble
-    this.bubbles.push(new Bubble(Math.random()*this.canvas.width, Math.random()*this.canvas.height, Math.random()*6-3, Math.random()*6-3, 15, "rgba(" + 31 + ", "+ 228 + ","+ 228 +")" ));
-    let numBubbles = 150;
-    for(var i = 1; i < numBubbles; i++){
+    //create attractor mover
+    this.movers.push(new Mover(Math.random()*this.canvas.width, Math.random()*this.canvas.height, Math.random()*6-3, Math.random()*6-3, 15, "rgba(" + 31 + ", "+ 228 + ","+ 228 +")" ));
+    let numMovers = 150;
+    for(var i = 1; i < numMovers; i++){
         var x, y, dx, dy, diam, clr, r, g, b;
 
         x = Math.random()*this.canvas.width;
@@ -28,7 +28,7 @@ function Game(){
         // b = 255;
         //clr = "rgba(" + r + ", "+ g + ","+ b +")"
         clr = "rgba(210, 173, 255,10)"
-        this.bubbles.push(new Bubble(x, y, dx, dy, diam, clr)); // add new bubble to array
+        this.movers.push(new Mover(x, y, dx, dy, diam, clr)); // add new mover to array
     }
 
     //  Add event handlers to all tile objects
@@ -49,13 +49,13 @@ function Game(){
           },false);
     }
 
-}//++++++++++++++++++++++  end Bubbles constructor
+}//++++++++++++++++++++++  end Movers constructor
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
   if(!this.gamePaused){
-    for(let i = 0; i < this.bubbles.length; i++){
-      this.bubbles[i].run();    // run each bubble
+    for(let i = 0; i < this.movers.length; i++){
+      this.movers[i].run();    // run each mover
    }
   }
 }
