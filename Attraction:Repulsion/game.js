@@ -23,11 +23,11 @@ function Game(){
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         diam = 15;//Math.random()*20 + 10;
-        // r = 255;
-        // g = 255;
-        // b = 255;
-        //clr = "rgba(" + r + ", "+ g + ","+ b +")"
-        clr = "rgba(210, 173, 255,10)"
+         r = 255;
+         g = 255;
+         b = 255;
+        clr = "rgba(" + r + ", "+ g + ","+ b +")"
+        //clr = "rgba(210, 173, 255,10)"
         this.movers.push(new Mover(x, y, dx, dy, diam, clr)); // add new mover to array
     }
 

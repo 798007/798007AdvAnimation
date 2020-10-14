@@ -21,19 +21,23 @@ Mover.prototype.render = function(){
     let ctx = game.ctx;
     let b = game.movers;
     if(this == b[0]){
-      ctx.strokeStyle = "rgba(13, 255, 30, 10)";
-      ctx.fillStyle = "rgba(13, 255, 30, 10)";
+      ctx.strokeStyle = "rgba(76, 241, 255, 10)";
+      ctx.fillStyle = "rgba(76, 241, 255, 10)";
     }
     else if(this == b[1]){
       ctx.strokeStyle = "rgba(69, 17, 38, 42)";
       ctx.fillStyle = "rgba(69, 17, 38, 42)";
     }
     else{
-        ctx.strokeStyle = this.clr;
+      ctx.strokeStyle = this.clr;
+      ctx.fillStyle = this.clr;
+        //ctx.strokeStyle = "rgba(255, 255, 255, 10)";
+        //ctx.fillStyle = "rgba(255, 255, 255, 10)";
     }
     ctx.beginPath();
     ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
     ctx.stroke();
+    ctx.fill();
 
   }
 
