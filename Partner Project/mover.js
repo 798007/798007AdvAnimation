@@ -30,10 +30,21 @@ Mover.prototype.render = function(){
           //ctx.strokeStyle = "rgba(255, 255, 255, 255)";
           //ctx.fillStyle = this.clr;
         }
+        // ctx.beginPath();
+        // ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
+        // ctx.stroke();
+        // ctx.fill();
+        ctx.save();
         ctx.beginPath();
-        ctx.arc(this.location.x,this.location.y, this.rad, Math.PI*2, 0, false);
+        ctx.translate(this.location.x, this.location.y);
+        ctx.rotate(this.velocity.getDirection());
+        ctx.moveTo(20, 0);
+        ctx.lineTo(-20, -10);
+        ctx.lineTo(-20, 10);
+        ctx.closePath();
         ctx.stroke();
         ctx.fill();
+        ctx.restore();
   }
 
 // Move the mover in a random direction
