@@ -26,6 +26,5 @@ Oscillator.prototype.display = function(){
   ctx.lineTo(0, 0);
   ctx.arc(this.x, this.y, 20, Math.PI*2, 0, false);
   ctx.stroke();
-  ctx.fill();
   ctx.restore();
 }
