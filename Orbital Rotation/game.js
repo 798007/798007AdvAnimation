@@ -1,8 +1,8 @@
 function Game(){
+    this.gamePaused = false;
     this.ga = new GameArea();
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.gamePaused = false;
     this.movers = [];
     this.createMovers(this.canvas, 55);
 
@@ -39,6 +39,7 @@ Game.prototype.createMovers = function(canvas, numMovers){
     g = Math.random() * 155;
     b = Math.random() * 155;
     clr = "rgba(" + r + ", " + g + "," + b + ")"
+    numOrbs = Math.floor(Math.random() * 10) + 3;
     this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
     //numOrbs = Math.floor(Math.random()*5 + 3);
     //this.movers[i] = new Mover(x, y, dx, dy, radius, clr, numOrbs);

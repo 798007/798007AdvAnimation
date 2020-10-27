@@ -10,31 +10,31 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   //create all the orbiters
   for(let i = 0; i < numOrbs; i++){
      let a = i * (Math.PI * 2)/numOrbs + this.orbitAngle;
-     let angleVel = numOrbs + 0.01;
+     let angleVel = numOrbs * 0.01; //movers with more orbiters rotate faster
      this.orbiters.push(new Orbiter(this, 4, 25, a, angleVel, this.clr));
   }
 }
 
   //  placing methods in the prototype (every movers shares functions)
 Mover.prototype.run = function(){
-    this.checkEdges();
     this.update();
+    this.checkEdges();
     this.render();
-  }
-
-// draw the bubble on the canvas
-Mover.prototype.render = function(){
-    let ctx = game.ctx;
-    let orb = game.orbiters;
-
+    //update and render the orbiters
     for(let i = 0; i < this.orbiters.length; i++){
       let orb = this.orbiters[i];
       orb.update();
       orb.render();
     }
+  }
 
+// draw the bubble on the canvas
+Mover.prototype.render = function(){
+        let ctx = game.ctx;
+        //render mover
         ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
         ctx.fillStyle = this.clr;
+        ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(this.location.x,this.location.y, this.radius, Math.PI*2, 0, false);
         ctx.stroke();
@@ -45,7 +45,7 @@ Mover.prototype.render = function(){
 Mover.prototype.update = function(){
     if(!game.gamePaused){
       this.velocity.add(this.acceleration);
-      this.velocity.limit(3);
+      //this.velocity.limit(3);
       this.location.add(this.velocity);
     }
   }
@@ -65,6 +65,7 @@ Mover.prototype.checkEdges = function(){
     this.mover = mover;
     this.radius = orbiterRad;
     this.rotator = new JSVector(orbitRad, 0);
+    //this.rotator.setMagnitude(orbitRad);
     this.rotator.setDirection(angle);
     this.location = JSVector.addGetNew(this.mover.location, this.rotator);
     this.angleVel = angleVel;
@@ -72,7 +73,7 @@ Mover.prototype.checkEdges = function(){
   }
 
   Orbiter.prototype.update = function () {
-    this.rotator.rotate(angleVel);
+    this.rotator.rotate(this.angleVel);
     this.location = JSVector.addGetNew(this.mover.location, this.rotator);
   }
 
