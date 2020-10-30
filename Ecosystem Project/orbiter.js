@@ -22,10 +22,10 @@ Orbiter.prototype.update = function(){
    ctx.stroke();
    ctx.fill();
    //draw line
-   ctx.lineCap = "round";
-   ctx.lineWidth = 4;
-   ctx.beginPath();
-   ctx.moveTo(this.mover.location.x, this.mover.location.y);
-   ctx.lineTo(this.location.x, this.location.y);
-   ctx.stroke();
+   // ctx.lineCap = "round";
+   // ctx.lineWidth = 4;
+   // ctx.beginPath();
+   // ctx.moveTo(this.mover.location.x, this.mover.location.y);
+   // ctx.lineTo(this.location.x, this.location.y);
+   // ctx.stroke();
 }

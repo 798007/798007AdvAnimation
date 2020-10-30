@@ -8,7 +8,7 @@ function Game(){
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
     this.movers = [];
-    this.createMovers(this.canvas, 10);
+    this.createMovers(this.canvas, 3);
     //   create the array of bubble objects
     this.stars = [];
     let numStars = 10;
@@ -24,9 +24,9 @@ function Game(){
         clr = "rgba(" + r + ", "+ g + ","+ b +")"
         this.stars.push(new Star(x, y, dx, dy, clr));
     }
-    this.hearts = [];
-    let numHearts = 4;
-    for(var i = 0; i < numHearts; i++){
+    this.moons = [];
+    let numMoons = 4;
+    for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
         x = Math.random()*this.canvas.width;
         y = Math.random()*this.canvas.height;
@@ -36,7 +36,7 @@ function Game(){
         g = 255;
         b = 255;
         clr = "rgba(" + r + ", "+ g + ","+ b +")"
-        this.hearts.push(new Heart(x, y, dx, dy, clr));
+        this.moons.push(new Moon(x, y, dx, dy, clr));
       }
 }
 // function to run the game each animation cycle
@@ -45,8 +45,8 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.stars.length; i++){
       this.stars[i].run();
     }
-     for(let i = 0; i < this.hearts.length; i++){
-     this.hearts[i].run();
+     for(let i = 0; i < this.moons.length; i++){
+     this.moons[i].run();
     }
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();
@@ -56,16 +56,16 @@ Game.prototype.run = function(){
 Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
-    radius = 7;
+    radius = 30;
     x = Math.random()*this.canvas.width;
     y = Math.random()*this.canvas.height;
     dx = Math.random()*2-1;
     dy = Math.random()*2-1;
-    r = Math.random()*200+55;
-    g = Math.random()*155;
-    b = Math.random()*155;
-    clr = "rgba(" + r + ", "+ g + ","+ b +")"
-    numOrbs = Math.floor(Math.random() * 10) + 3;
+    // r = Math.random()*200+55;
+    // g = Math.random()*155;
+    // b = Math.random()*155;
+    clr = "rgba(8, 146, 208, 1)"
+    numOrbs = 40;
     this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
   }
 }
