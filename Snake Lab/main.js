@@ -16,21 +16,3 @@ function animate(){
   game.run();    // run the game
   requestAnimationFrame(animate);
 }
-
-function loadMovers(numMovers){
-  var movers = [];
-  for(var i = 0; i < numMovers; i++){
-    var x, y, dx, dy, diam, clr, r, g, b;
-    x = Math.random()*canvas.width;
-    y = Math.random()*canvas.height;
-    dx = Math.random()*6-3;
-    dy = Math.random()*6-3;
-    diam = 15;
-    r = 255;
-    g = 255;
-    b = 255;
-    clr = "rgba(" + r + ", " + g + "," + b +")"
-    movers[i] = new Mover(x, y, dx, dy, diam, clr);
-  }
-
-}
