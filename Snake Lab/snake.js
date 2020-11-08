@@ -22,6 +22,7 @@ Snake.prototype.render = function(){
   let ctx = game.ctx;
   for(var i = 0; i < this.numSegments; i++){
     ctx.strokeStyle = this.clr;
+    ctx.fillStyle = this.clr;
     ctx.beginPath();
     ctx.arc(this.segments[i].x, this.segments[i].y, 5, Math.PI*2, 0, false);
     ctx.stroke();
