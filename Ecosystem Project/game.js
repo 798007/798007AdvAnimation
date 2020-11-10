@@ -30,13 +30,28 @@ function Game(){
         var x, y, dx, dy, clr, r, g, b;
         x = Math.random()*this.canvas.width;
         y = Math.random()*this.canvas.height;
-        dx = Math.random()*6-3;
-        dy = Math.random()*6-3;
+        dx = Math.random()*3-3;
+        dy = Math.random()*3-3;
         r = 255;
         g = 255;
         b = 255;
         clr = "rgba(" + r + ", "+ g + ","+ b +")"
         this.moons.push(new Moon(x, y, dx, dy, clr));
+      }
+      this.snakes = [];
+      let numSnakes = 3;
+      for(var i = 0; i < numSnakes; i++){
+        var x, y, dx, dy, clr, r, g, b, numSegments;
+        x = Math.random()*this.canvas.width;
+        y = Math.random()*this.canvas.height;
+        dx = Math.random()*2-1;
+        dy = Math.random()*2-1;
+        r = Math.random()*200+55;
+        g = Math.random()*155;
+        b = Math.random()*155;
+        clr = "rgba(" + r + ", " + g + "," + b +")"
+        numSegments = 15;
+        this.snakes.push(new Snake(x, y, dx, dy, clr, numSegments));
       }
 }
 // function to run the game each animation cycle
@@ -50,6 +65,9 @@ Game.prototype.run = function(){
     }
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();
+    }
+    for(let i = 0; i < this.snakes.length; i++){
+      this.snakes[i].run();
     }
   }
 }

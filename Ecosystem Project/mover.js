@@ -46,17 +46,11 @@ Mover.prototype.update = function(){
 }
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Mover.prototype.checkEdges = function(){
-    let canvas = game.canvas;
-    if (this.location.x > canvas.width){
-      this.location.x = 0;
-    }
-    else if(this.location.x < 0){
-      this.location.x = canvas.width;
-    }
-    if (this.location.y > canvas.height){
-      this.location.y = 0;
-    }
-    else if(this.location.y < 0){
-      this.location.y = canvas.height;
-    }
+  let canvas = game.canvas;
+  if(this.location.x > canvas.width || this.location.x < 0){
+    this.velocity.x = -this.velocity.x;
   }
+  if(this.location.y > canvas.height || this.location.y < 0){
+    this.velocity.y = -this.velocity.y;
+  }
+}
