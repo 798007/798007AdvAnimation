@@ -1,10 +1,10 @@
-function Particle(x, y, dx, dy, rad, clr, n){
+function Particle(x, y, rad, clr){
   this.location = new JSVector(x, y);
-  this.velocity = new JSVector(dx, dy);
-  this.acceleration = new JSVector(0, 0);
-  this.rad = rad;
+  this.velocity = new JSVector(Math.random()*3-1, Math.random()*3-1);
+  this.acceleration = new JSVector(0, 0.07);
+  this.lifeSpan = 200;
+  this.radius = rad;
   this.clr = clr;
-  this.orbiters = [];
 }
 
 Particle.prototype.run = function(){
@@ -14,19 +14,26 @@ Particle.prototype.run = function(){
 
 Particle.prototype.update = function(){
     if(!game.gamePaused){
-      this.location.add(this.velocity);
-      this.velocity.limit(3);
       this.velocity.add(this.acceleration);
+      this.location.add(this.velocity);
+      this.lifeSpan = this.lifeSpan - 2;
     }
   }
 
-// When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
-// Particle.prototype.checkEdges = function(){
-//     let canvas = game.canvas;
-//     if(this.location.x > canvas.width || this.location.x < 0){
-//       this.velocity.x = -this.velocity.x;
-//     }
-//     if(this.location.y > canvas.height || this.location.y < 0){
-//       this.velocity.y = -this.velocity.y;
-//     }
-//   }
+Particle.prototype.render = function(){
+  let ctx = game.ctx;
+  ctx.strokeStyle = this.clr;
+  ctx.fillStyle = this.clr;
+  ctx.beginPath();
+  ctx.arc(this.location.x, this.location.y, this.radius, Math.PI*2, 0, false);
+  ctx.stroke();
+  ctx.fill();
+}
+
+Particle.prototype.isDead = function(){
+  if(this.lifeSpan < 0){
+    return true;
+  }else{
+    return false;
+  }
+}
