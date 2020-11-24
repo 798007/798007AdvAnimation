@@ -6,10 +6,11 @@ function Vehicle(loc){
   this.vel = new JSVector(dx, dy);
   this.acc = new JSVector(0, 0);
   this.desiredSep = 30; //desired separation between vehicles
-  this.neighborDist = 150;
+  this.neighborDist = 100;
   //this.scl = 3;
   this.clr = "rgba(180,0,220,.8)";
   this.maxSpeed = document.getElementById("slider2").value;
+  //this.maxSpeed = 1;
   this.maxForce = document.getElementById("slider1").value;
 }
 
@@ -52,11 +53,11 @@ Vehicle.prototype.render = function(){
   ctx.save();
   ctx.beginPath();
   ctx.translate(this.loc.x, this.loc.y);
-  ctx.rotate(this.vel.getDirection()-Math.PI/2);
-  ctx.moveTo(-10, -15);
-  //ctx.lineTo(0, -5);
-  ctx.lineTo(10, -15);
-  ctx.lineTo(0, 0);
+  ctx.rotate(this.vel.getDirection());
+  ctx.moveTo(10, 0);
+  ctx.lineTo(-10, -5);
+  ctx.lineTo(-10, 5);
+  ctx.closePath();
   ctx.stroke();
   ctx.fill();
   ctx.restore();
@@ -111,11 +112,13 @@ Vehicle.prototype.align = function (v) {
   }
   if(count>0){
     sum.divide(count);
-    sum.normalize();
-    sum.multiply(document.getElementById("slider2").value);
-    let move = sum.sub(this.vel);
-    move.limit(document.getElementById("slider1").value);
-    return move;
+     sum.normalize();
+     sum.multiply(game.slider2.value);
+    let steer = sum.sub(this.vel);
+    // steer.normalize();
+    // steer.multiply(game.slider4.value);
+    steer.limit(game.slider1.value);
+    return steer;
   }else{
     return new JSVector(0, 0);
   }
@@ -133,6 +136,8 @@ Vehicle.prototype.cohesion = function (v){
   }
   if(count>0){
     sum.divide(count);
+    sum.normalize();
+    sum.multiply(game.slider2.value);
     return this.seek(sum);
   }else{
     return new JSVector(0, 0);
@@ -140,10 +145,10 @@ Vehicle.prototype.cohesion = function (v){
 }
 
 Vehicle.prototype.seek = function(target){
-  let seek = target.sub(this.loc);
-  seek.normalize();
-  seek.multiply(document.getElementById("slider2").value);
-  let move = seek.sub(this.vel);
-  move.limit(document.getElementById("slider1").value);
-  return move;
+  let desired = target.sub(this.loc);
+  desired.normalize();
+  desired.multiply(game.slider2.value); //maxSpeed
+  let steer = desired.sub(this.vel);
+  steer.limit(game.slider1.value); //maxForce
+  return steer;
 }
