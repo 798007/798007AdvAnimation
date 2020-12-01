@@ -136,8 +136,8 @@ Vehicle.prototype.cohesion = function (v){
   }
   if(count>0){
     sum.divide(count);
-    sum.normalize();
-    sum.multiply(game.slider2.value);
+    //sum.normalize();
+    //sum.multiply(game.slider2.value);
     return this.seek(sum);
   }else{
     return new JSVector(0, 0);
