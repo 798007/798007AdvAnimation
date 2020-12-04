@@ -12,8 +12,12 @@ function Snake(x, y, dx, dy, clr, numSegments){
   }
 }
 
+  //create particle system to come out of the snake's head
+  //this.particleSystem = new ParticleSystem(this.mover.location.x, this.mover.location.y);
+
 Snake.prototype.run = function(){
   this.mover.run();
+  //this.particleSystem.run(this.mover.location.x, this.mover.location.y);
   this.update();
   this.render();
 }
