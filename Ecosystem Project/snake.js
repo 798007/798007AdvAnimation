@@ -1,8 +1,9 @@
 function Snake(x, y, dx, dy, clr, numSegments){
-  this.mover = new Mover(x, y, dx, dy, 10, clr);
+  this.snakeHead = new SnakeHead(x, y, dx, dy, 10, clr);
   this.clr = clr;
   this.segments = [];
   this.numSegments = numSegments;
+  this.rad = 5;
 
   //create segments
   let d = 20;
@@ -13,11 +14,11 @@ function Snake(x, y, dx, dy, clr, numSegments){
 }
 
   //create particle system to come out of the snake's head
-  //this.particleSystem = new ParticleSystem(this.mover.location.x, this.mover.location.y);
+  this.particleSystem = new ParticleSystem(this.snakeHead.location.x, this.snakeHead.location.y);
 
 Snake.prototype.run = function(){
-  this.mover.run();
-  //this.particleSystem.run(this.mover.location.x, this.mover.location.y);
+  this.snakeHead.run();
+  this.particleSystem.run(this.snakeHead.location.x, this.snakeHead.location.y);
   this.update();
   this.render();
 }
@@ -27,10 +28,19 @@ Snake.prototype.render = function(){
   for(var i = 0; i < this.numSegments; i++){
     ctx.strokeStyle = this.clr;
     ctx.fillStyle = this.clr;
+    ctx.save();
     ctx.beginPath();
-    ctx.arc(this.segments[i].x, this.segments[i].y, 5, Math.PI*2, 0, false);
+    ctx.lineWidth = 3;
+    ctx.arc(this.segments[i].x, this.segments[i].y, this.rad, Math.PI*2, 0, false);
+    ctx.stroke();
+    ctx.translate(this.segments[i].x, this.segments[i].y);
+    ctx.moveTo(-6, -6);
+    ctx.lineTo(0, 8);
+    ctx.lineTo(6, -6);
+    ctx.lineTo(-6, -6);
     ctx.stroke();
     ctx.fill();
+    ctx.restore();
   }
 }
 
@@ -38,7 +48,7 @@ Snake.prototype.update = function(){
   if(!game.gamePaused){
     for(let i=0; i<this.numSegments;i++){
       if(i==0){
-        this.segments[i] = new JSVector(this.mover.location.x, this.mover.location.y);
+        this.segments[i] = new JSVector(this.snakeHead.location.x, this.snakeHead.location.y);
       }
       else{
         let vB = JSVector.subGetNew(this.segments[i], this.segments[i-1]);

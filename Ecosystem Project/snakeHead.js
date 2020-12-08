@@ -1,7 +1,7 @@
-function SnakeHead(x, y, dx, dy, rad, clr){
-  this.loc = new JSVector(x, y);
-  this.vel = new JSVector(dx, dy);
-  this.radius = rad;
+function SnakeHead(x, y, dx, dy, radius, clr){
+  this.location = new JSVector(x, y);
+  this.velocity = new JSVector(dx, dy);
+  this.radius = radius;
   this.clr = clr;
 }
 
@@ -12,16 +12,16 @@ SnakeHead.prototype.run = function(){
 
 SnakeHead.prototype.update = function(){
   if(!game.gamePaused){
-    this.loc.add(this.vel);
+    this.location.add(this.velocity);
   }
 }
 
 SnakeHead.prototype.checkEdges = function(){
-  let cnv = game.canvas;
-  if(this.loc.x > cnv.width || this.loc.x < 0){
-    this.vel.x = -this.vel.x;
+  let canvas = game.canvas;
+  if(this.location.x > canvas.width || this.location.x < 0){
+    this.velocity.x = -this.velocity.x;
   }
-  if(this.loc.y > cnv.height || this.loc.y < 0){
-    this.vel.y = -this.vel.y;
+  if(this.location.y > canvas.height || this.location.y < 0){
+    this.velocity.y = -this.velocity.y;
   }
 }
