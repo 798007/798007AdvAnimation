@@ -9,7 +9,7 @@ ParticleSystem.prototype.run = function(x, y){
 }
 
 ParticleSystem.prototype.addParticle = function(){
-  let rad = 5;
+  let rad = 3;
   let particleClr = "rgba(34, 235, 232)";
   this.particles.push(new Particle(this.emit.x, this.emit.y, rad, particleClr));
 }

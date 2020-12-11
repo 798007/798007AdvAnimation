@@ -10,6 +10,18 @@ function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
 Orbiter.prototype.update = function(){
   this.rotator.rotate(this.angleVel);
   this.location = JSVector.addGetNew(this.mover.location, this.rotator);
+
+  // let o = this.mover.orbiters;
+  // for(let i = 0; i<o.length; i++){
+  //   if(this !== o[i]){
+  //     let d = this.location.distance(o[i].location);
+  //     if(d<200){
+  //       this.acceleration = JSVector.subGetNew(this.location, o[i].location);
+  //       this.acceleration.normalize();
+  //       this.acceleration.multiply(0.05);
+  //     }
+  //   }
+  // }
 }
  Orbiter.prototype.render = function(){
    let ctx = game.ctx;

@@ -15,6 +15,16 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
    }
 }
 Mover.prototype.run = function(){
+    //mover loses orbiters whenever they touch a snake's particles
+    for(let i = 0; i < game.snakes.length; i++){
+      let particles = game.snakes[i].particleSystem.particles;
+      for(let j = 0; j < particles.length; j++){
+        let d = this.location.distance(particles[i].location);
+        if(d<50 && this.numOrbs>1){
+          this.numOrbs = this.numOrbs - 1;
+        }
+      }
+    }
     this.checkEdges();
     this.update();
     this.render();
@@ -43,6 +53,18 @@ Mover.prototype.update = function(){
       this.velocity.limit(3);
       this.location.add(this.velocity);
     }
+
+    // let o = this.orbiters;
+    // for(let i = 0; i<o.length; i++){
+    //   if(this !== o[i]){
+    //     let d = this.location.distance(o[i].location);
+    //     if(d<400){
+    //       this.acceleration = JSVector.subGetNew(this.location, o[i].location);
+    //       this.acceleration.normalize();
+    //       this.acceleration.multiply(0.05);
+    //     }
+    //   }
+    // }
 }
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Mover.prototype.checkEdges = function(){

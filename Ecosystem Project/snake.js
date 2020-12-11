@@ -3,7 +3,7 @@ function Snake(x, y, dx, dy, clr, numSegments){
   this.clr = clr;
   this.segments = [];
   this.numSegments = numSegments;
-  this.rad = 5;
+  this.rad = 7;
 
   //create segments
   let d = 20;
@@ -11,10 +11,10 @@ function Snake(x, y, dx, dy, clr, numSegments){
     this.segments[i] = new JSVector(x-d, y-d);
     d = d-20;
   }
-}
 
   //create particle system to come out of the snake's head
   this.particleSystem = new ParticleSystem(this.snakeHead.location.x, this.snakeHead.location.y);
+}
 
 Snake.prototype.run = function(){
   this.snakeHead.run();
@@ -30,14 +30,7 @@ Snake.prototype.render = function(){
     ctx.fillStyle = this.clr;
     ctx.save();
     ctx.beginPath();
-    ctx.lineWidth = 3;
     ctx.arc(this.segments[i].x, this.segments[i].y, this.rad, Math.PI*2, 0, false);
-    ctx.stroke();
-    ctx.translate(this.segments[i].x, this.segments[i].y);
-    ctx.moveTo(-6, -6);
-    ctx.lineTo(0, 8);
-    ctx.lineTo(6, -6);
-    ctx.lineTo(-6, -6);
     ctx.stroke();
     ctx.fill();
     ctx.restore();
