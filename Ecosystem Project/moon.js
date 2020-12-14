@@ -21,13 +21,13 @@ Moon.prototype.render = function(){
         ctx.strokeStyle = "rgba(189, 195, 199, 1)";
         ctx.fillStyle = "rgba(189, 195, 199, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x, this.location.y, 30, Math.PI*2, 0, false);
+        ctx.arc(this.location.x, this.location.y, 20, Math.PI*2, 0, false);
         ctx.fill();
 
         ctx.strokeStyle = "rgba(16, 12, 8, 1)";
         ctx.fillStyle = "rgba(16, 12, 8, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x+15, this.location.y, 30, Math.PI*2, 0, false);
+        ctx.arc(this.location.x+10, this.location.y, 20, Math.PI*2, 0, false);
         ctx.fill();
         ctx.restore();
 
@@ -44,16 +44,18 @@ Moon.prototype.render = function(){
 // Move the mover in a random direction
 Moon.prototype.update = function(){
     if(!game.gamePaused){
+        this.velocity.add(this.acceleration);
+        this.velocity.limit(3);
         this.location.add(this.velocity);
     }
 }
 // When a mover hits an edge of the canvas, it wraps around to the opposite edge.
 Moon.prototype.checkEdges = function(){
   let canvas = game.canvas;
-    if(this.location.x > canvas.width || this.location.x < 0){
-      this.velocity.x = -this.velocity.x;
-    }
-    if(this.location.y > canvas.height || this.location.y < 0){
-      this.velocity.y = -this.velocity.y;
-    }
+  if(this.location.x > canvas.width || this.location.x < 0){
+    this.velocity.x = -this.velocity.x;
+  }
+  if(this.location.y > canvas.height || this.location.y < 0){
+    this.velocity.y = -this.velocity.y;
+  }
 }

@@ -7,6 +7,7 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.clr = clr;
   this.orbiters = [];
   this.orbitclr = "rgba(102, 255, 0, 1)"
+
   //create all orbiters
    for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
@@ -15,16 +16,6 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
    }
 }
 Mover.prototype.run = function(){
-    //mover loses orbiters whenever they touch a snake's particles
-    for(let i = 0; i < game.snakes.length; i++){
-      let particles = game.snakes[i].particleSystem.particles;
-      for(let j = 0; j < particles.length; j++){
-        let d = this.location.distance(particles[i].location);
-        if(d<50 && this.numOrbs>1){
-          this.numOrbs = this.numOrbs - 1;
-        }
-      }
-    }
     this.checkEdges();
     this.update();
     this.render();
