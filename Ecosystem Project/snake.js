@@ -51,3 +51,7 @@ Snake.prototype.update = function(){
     }
   }
 }
+
+Snake.prototype.addParticle = function(){
+  this.particleSystem.addParticle();
+}

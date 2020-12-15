@@ -11,11 +11,11 @@ function Game(){
     this.createMovers(this.canvas, 3);
 
     this.moons = [];
-    let numMoons = 4;
+    let numMoons = 10;
     for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
-        x = Math.random()*this.canvas.width;
-        y = Math.random()*this.canvas.height;
+        x = Math.random()*(this.canvas.width - 40) + 20;
+        y = Math.random()*(this.canvas.height - 40) + 20;
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         r = 255;
@@ -26,18 +26,23 @@ function Game(){
       }
 
       this.vehicles = [];
-      this.numVehicles = 50;
+      this.numVehicles = 20;
       for(let i = 0; i < this.numVehicles; i++){
         this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height)));
       }
 
       this.snakes = [];
-      this.createSnakes(this.canvas, 3);
+      this.createSnakes(this.canvas, 1);
 
+      function createParticle(){
+        for(let i = 0; i < game.snakes.length; i++){
+          game.snakes[i].addParticle();
+        }
+      }
+        setInterval(createParticle,200);     // use a timer to create 5 particles per second
 }
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-     if(!this.gamePaused){
      for(let i = 0; i < this.moons.length; i++){
      this.moons[i].run();
     }
@@ -51,20 +56,19 @@ Game.prototype.run = function(){
       this.vehicles[i].run(this.vehicles);
     }
   }
-}
 Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
     radius = 30;
     x = Math.random()*this.canvas.width;
     y = Math.random()*this.canvas.height;
-    dx = Math.random()*2-1;
-    dy = Math.random()*2-1;
+    dx = Math.random()*6-3;
+    dy = Math.random()*6-3;
     // r = Math.random()*200+55;
     // g = Math.random()*155;
     // b = Math.random()*155;
     clr = "rgba(8, 146, 208, 1)"
-    numOrbs = 40;
+    numOrbs = 5;
     this.movers.push(new Mover(x, y, dx, dy, radius, clr, numOrbs));
   }
 }
@@ -72,10 +76,10 @@ Game.prototype.createMovers = function(canvas, numMovers){
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i < numSnakes; i++){
     var x, y, dx, dy, r, g, b, clr, numSegments;
-    x = Math.random()*this.canvas.width;
-    y = Math.random()*this.canvas.height;
-    dx = Math.random()*2-1;
-    dy = Math.random()*2-1;
+    x = this.canvas.width/2;
+    y = canvas.height/2;
+    dx = Math.random()*6-3;
+    dy = Math.random()*6-3;
     r = Math.random()*200+55;
     g = Math.random()*155;
     b = Math.random()*155;

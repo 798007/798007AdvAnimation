@@ -2,7 +2,7 @@ function Particle(x, y, rad, clr){
   this.loc = new JSVector(x, y);
   this.vel = new JSVector(Math.random()*3-1, Math.random()*3-1);
   //this.acc = new JSVector(0, 0.07);
-  this.lifeSpan = 200;
+  this.lifeSpan = 500;
   this.radius = rad;
   this.clr = clr;
 }
@@ -15,6 +15,14 @@ Particle.prototype.run = function(){
 Particle.prototype.update = function(){
   //this.vel.add(this.acc);
   this.loc.add(this.vel);
+  for(let i = 0; i < game.movers.length; i++){
+    for(let j = 0; j < game.movers[i].orbiters.length; j++){
+      let orb = game.movers[i].orbiters[j];
+      if(this.loc.distance(orb.location) < this.radius + orb.radius){
+        this.lifeSpan = -1;
+      }
+    }
+  }
   this.lifeSpan = this.lifeSpan-2;
 }
 

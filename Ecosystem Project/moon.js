@@ -4,6 +4,8 @@ function Moon(x, y, dx, dy, clr){
   this.acceleration = new JSVector(0, 0);
   this.clr = clr;
   this.isOverlapping = false;
+  this.angl = Math.random() * Math.PI * 2;
+  this.anglVel = 0.1;
 }
   //  placing methods in the prototype (every mover shares functions)
 Moon.prototype.run = function(){
@@ -18,16 +20,18 @@ Moon.prototype.render = function(){
         // ctx.fillStyle = "rgba(240, 52, 52, 1)";
         ctx.save();
         ctx.translate(this.location.x, this.location.y);
+        this.angl += this.anglVel;
+        ctx.rotate(this.angl);
         ctx.strokeStyle = "rgba(189, 195, 199, 1)";
         ctx.fillStyle = "rgba(189, 195, 199, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x, this.location.y, 20, Math.PI*2, 0, false);
+        ctx.arc(0, 0, 20, Math.PI*2, 0, false);
         ctx.fill();
 
         ctx.strokeStyle = "rgba(16, 12, 8, 1)";
         ctx.fillStyle = "rgba(16, 12, 8, 1)";
         ctx.beginPath();
-        ctx.arc(this.location.x+10, this.location.y, 20, Math.PI*2, 0, false);
+        ctx.arc(10,  0, 20, Math.PI*2, 0, false);
         ctx.fill();
         ctx.restore();
 
@@ -44,7 +48,22 @@ Moon.prototype.render = function(){
 // Move the mover in a random direction
 Moon.prototype.update = function(){
     if(!game.gamePaused){
+      let acc = new JSVector(0, 0);
+      for(let i = 0; i < game.moons.length; i++){
+        if(game.moons[i] !== this){
+          let distance = this.location.distance(game.moons[i].location);
+          if(distance < 60){
+            let repel = JSVector.subGetNew(this.location, game.moons[i].location);
+            repel = JSVector.subGetNew(this.location, game.moons[i].location);
+            repel.normalize();
+            repel.multiply(1);
+            acc.add(repel);
+          }
+        }
+      }
+        this.acceleration.add(acc);
         this.velocity.add(this.acceleration);
+        this.acceleration.multiply(0);
         this.velocity.limit(3);
         this.location.add(this.velocity);
     }
@@ -52,10 +71,10 @@ Moon.prototype.update = function(){
 // When a mover hits an edge of the canvas, it wraps around to the opposite edge.
 Moon.prototype.checkEdges = function(){
   let canvas = game.canvas;
-  if(this.location.x > canvas.width || this.location.x < 0){
+  if(this.location.x + 20 > canvas.width || this.location.x - 20 < 0){
     this.velocity.x = -this.velocity.x;
   }
-  if(this.location.y > canvas.height || this.location.y < 0){
+  if(this.location.y + 20 > canvas.height || this.location.y - 20 < 0){
     this.velocity.y = -this.velocity.y;
   }
 }
