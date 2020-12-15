@@ -10,6 +10,7 @@ function Game(){
     this.movers = [];
     this.createMovers(this.canvas, 3);
 
+    //loading in moons
     this.moons = [];
     let numMoons = 10;
     for(var i = 0; i < numMoons; i++){
@@ -25,15 +26,18 @@ function Game(){
         this.moons.push(new Moon(x, y, dx, dy, clr));
       }
 
+      //loading in stars
       this.vehicles = [];
       this.numVehicles = 20;
       for(let i = 0; i < this.numVehicles; i++){
         this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.canvas.width, Math.random()*this.canvas.height)));
       }
 
+      //creating snakes
       this.snakes = [];
       this.createSnakes(this.canvas, 1);
 
+      //adds Particles with timer
       function createParticle(){
         for(let i = 0; i < game.snakes.length; i++){
           game.snakes[i].addParticle();
@@ -41,6 +45,7 @@ function Game(){
       }
         setInterval(createParticle,200);     // use a timer to create 5 particles per second
 }
+
 // function to run the game each animation cycle
 Game.prototype.run = function(){
      for(let i = 0; i < this.moons.length; i++){
@@ -53,9 +58,11 @@ Game.prototype.run = function(){
       this.snakes[i].run();
     }
     for(let i = 0; i < this.numVehicles; i++){
-      this.vehicles[i].run(this.vehicles);
+      this.vehicles[i].run(this.vehicles);    //stars
     }
   }
+
+//creates mover objects
 Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
@@ -73,6 +80,7 @@ Game.prototype.createMovers = function(canvas, numMovers){
   }
 }
 
+//creates snake objects
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i < numSnakes; i++){
     var x, y, dx, dy, r, g, b, clr, numSegments;

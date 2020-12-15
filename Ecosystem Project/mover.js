@@ -11,10 +11,11 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   //create all orbiters
    for(let i = 0; i<numOrbs; i++){
      let a = i*(Math.PI*2)/numOrbs + this.orbitAngle;
-     let angleVel = numOrbs*0.05;
+     let angleVel = numOrbs*0.015;
      this.orbiters.push(new Orbiter(this, 6, 100, a, angleVel, this.orbitclr));
    }
 }
+
 Mover.prototype.run = function(){
     this.checkEdges();
     this.update();
@@ -26,7 +27,7 @@ Mover.prototype.run = function(){
       orb.render();
     }
 }
-// draw the bubble on the canvas
+// draw the mover on the canvas
 Mover.prototype.render = function(){
     let ctx = game.ctx;
     let b = game.movers;
@@ -37,14 +38,14 @@ Mover.prototype.render = function(){
         ctx.stroke();
         ctx.fill();
   }
-// Move the bubble in a random direction
+
+// Move the mover in a random direction
 Mover.prototype.update = function(){
     if(!game.gamePaused){
       this.velocity.add(this.acceleration);
       this.velocity.limit(6);
       this.location.add(this.velocity);
     }
-
     // let o = this.orbiters;
     // for(let i = 0; i<o.length; i++){
     //   if(this !== o[i]){
@@ -57,7 +58,7 @@ Mover.prototype.update = function(){
     //   }
     // }
 }
-// When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
+// When a mover hits an edge of the canvas, turns around to go in the opposite direction
 Mover.prototype.checkEdges = function(){
   let canvas = game.canvas;
   if(this.location.x > canvas.width || this.location.x < 0){

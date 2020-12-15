@@ -16,6 +16,7 @@ SnakeHead.prototype.update = function(){
   }
 }
 
+//When a snake hits an edge of the canvas, it turns around and goes in the opposite direction
 SnakeHead.prototype.checkEdges = function(){
   let canvas = game.canvas;
   if(this.location.x > canvas.width || this.location.x < 0){

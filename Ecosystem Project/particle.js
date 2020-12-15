@@ -15,6 +15,8 @@ Particle.prototype.run = function(){
 Particle.prototype.update = function(){
   //this.vel.add(this.acc);
   this.loc.add(this.vel);
+
+  //particle disappears when an orbiter hits it
   for(let i = 0; i < game.movers.length; i++){
     for(let j = 0; j < game.movers[i].orbiters.length; j++){
       let orb = game.movers[i].orbiters[j];
@@ -23,9 +25,17 @@ Particle.prototype.update = function(){
       }
     }
   }
+
+  //mover changes color when hitting particle
+  for(let i = 0; i < game.movers.length; i++){
+      if(this.loc.distance(game.movers[i].location) < this.radius + game.movers[i].radius){
+        game.movers[i].clr = "rgba(255, 0, 0)"
+      }
+    }
   this.lifeSpan = this.lifeSpan-2;
 }
 
+//draws particles on the canvas
 Particle.prototype.render = function(){
   let ctx = game.ctx;
   ctx.strokeStyle = this.clr;
@@ -38,6 +48,7 @@ Particle.prototype.render = function(){
   ctx.restore();
 }
 
+//when a particle is dead, it will disappear from the canvas
 Particle.prototype.isDead = function(){
   if(this.lifeSpan < 0){
     return true;

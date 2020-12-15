@@ -72,9 +72,9 @@ Vehicle.prototype.flock = function(vehicles){
   let ali = this.align(vehicles);
   let coh = this.cohesion(vehicles);
   //set multiples via sliders
-  let sepMult = 0.05;
-  let aliMult = 0.05;
-  let cohMult = 0.1;
+  let sepMult = 0.01;
+  let aliMult = 0.01;
+  let cohMult = 0.01;
   //calculate three forces
   sep.multiply(sepMult);
   ali.multiply(aliMult);
@@ -87,6 +87,8 @@ Vehicle.prototype.flock = function(vehicles){
   this.acc.add(flockForce);
 }
 //+++++++++++++++++++++++++++++ Flocking functions
+
+//separate function
 Vehicle.prototype.separate = function (v) {
   let separation = new JSVector(0, 0);
   for(var i=0; i<v.length; i++){
@@ -100,6 +102,7 @@ Vehicle.prototype.separate = function (v) {
   return separation;
 }
 
+//alignment function
 Vehicle.prototype.align = function (v) {
   let sum = new JSVector(0, 0);
   let count = 0;
@@ -124,6 +127,7 @@ Vehicle.prototype.align = function (v) {
   }
 }
 
+//cohesion function
 Vehicle.prototype.cohesion = function (v){
   let sum = new JSVector(0, 0);
   let count = 0;

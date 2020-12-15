@@ -13,7 +13,7 @@ Moon.prototype.run = function(){
     this.update();
     this.render();
   }
-// draw the mover on the canvas
+// draw the moon on the canvas
 Moon.prototype.render = function(){
     let ctx = game.ctx;
         // ctx.strokeStyle = "rgba(240, 52, 52, 1)";
@@ -45,7 +45,7 @@ Moon.prototype.render = function(){
         // ctx.fill();
         // ctx.restore();
   }
-// Move the mover in a random direction
+// Move the moonin a random direction
 Moon.prototype.update = function(){
     if(!game.gamePaused){
       let acc = new JSVector(0, 0);
@@ -68,7 +68,7 @@ Moon.prototype.update = function(){
         this.location.add(this.velocity);
     }
 }
-// When a mover hits an edge of the canvas, it wraps around to the opposite edge.
+// When a moon hits an edge of the canvas, it turns around and goes in the opposite direction
 Moon.prototype.checkEdges = function(){
   let canvas = game.canvas;
   if(this.location.x + 20 > canvas.width || this.location.x - 20 < 0){

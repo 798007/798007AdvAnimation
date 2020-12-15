@@ -23,6 +23,7 @@ Snake.prototype.run = function(){
   this.render();
 }
 
+//draws snake on canvas
 Snake.prototype.render = function(){
   let ctx = game.ctx;
   for(var i = 0; i < this.numSegments; i++){

@@ -7,6 +7,7 @@ function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
   this.angleVel = angleVel;
   this.clr = clr;
  }
+
 Orbiter.prototype.update = function(){
   this.rotator.rotate(this.angleVel);
   this.location = JSVector.addGetNew(this.mover.location, this.rotator);
@@ -23,6 +24,7 @@ Orbiter.prototype.update = function(){
   //   }
   // }
 }
+
  Orbiter.prototype.render = function(){
    let ctx = game.ctx;
    //draw orbiter
