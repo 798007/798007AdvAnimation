@@ -89,6 +89,10 @@ Game.prototype.run = function(){
     // center the world in canvas2
     ctx2.translate(this.world.width/2, this.world.height/2);
 
+    // draw the outline of canvas1 in canvas2
+    ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
+    ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
+
     // draw the x and y axes of the world
     ctx2.strokeStyle = "rgba(255, 0, 0, 1)"
     ctx2.moveTo(0, this.world.top);
@@ -101,8 +105,8 @@ Game.prototype.run = function(){
     ctx2.restore();
 
     // draw the outline of canvas1 in canvas2
-    ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
-    ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
+    // ctx2.strokeStyle = "rgba(255, 255, 255, 1)"
+    // ctx2.strokeRect(this.canvas1Loc.x, this.canvas1Loc.y, this.canvas1.width, this.canvas1.height);
 
 
     // run all the actors
