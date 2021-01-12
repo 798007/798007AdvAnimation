@@ -47,14 +47,14 @@ function Game(){
 
   //creatures
   this.movers = [];
-  this.createMovers(this.world, 3);
+  this.createMovers(this.world, 5);
 
   this.moons = [];
-    let numMoons = 10;
+    let numMoons = 20;
     for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
-        x = Math.random()*(this.world.width - 40) + 20;
-        y = Math.random()*(this.world.height - 40) + 20;
+        x = Math.random()*(this.world.width - this.world.width/2);
+        y = Math.random()*(this.world.height - this.world.height/2);
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         r = 255;
@@ -65,13 +65,13 @@ function Game(){
       }
 
   this.vehicles = [];
-      this.numVehicles = 20;
+      this.numVehicles = 30;
       for(let i = 0; i < this.numVehicles; i++){
-        this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.world.width, Math.random()*this.world.height)));
+        this.vehicles.push(new Vehicle(new JSVector((Math.random()*(this.world.width - this.world.width/2)), (Math.random()*(this.world.height - this.world.height/2)))));
       }
 
   this.snakes = [];
-  this.createSnakes(this.world, 1);
+  this.createSnakes(this.world, 4);
 
   function createParticle(){
         for(let i = 0; i < game.snakes.length; i++){
@@ -161,8 +161,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
     radius = 30;
-    x = Math.random()*this.world.width;
-    y = Math.random()*this.world.height;
+    x = Math.random()*(this.world.width - this.world.width/2);
+    y = Math.random()*(this.world.height - this.world.height/2);
     dx = Math.random()*6-3;
     dy = Math.random()*6-3;
     // r = Math.random()*200+55;
@@ -178,8 +178,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i < numSnakes; i++){
     var x, y, dx, dy, r, g, b, clr, numSegments;
-    x = this.world.width/2;
-    y = this.world.height/2;
+    x = Math.random()*(this.world.width - this.world.width/2);
+    y = Math.random()*(this.world.height - this.world.height/2);
     dx = Math.random()*6-3;
     dy = Math.random()*6-3;
     r = Math.random()*200+55;

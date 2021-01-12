@@ -5,12 +5,12 @@ function Vehicle(loc){
   let dy = Math.random()*4-2;
   this.vel = new JSVector(dx, dy);
   this.acc = new JSVector(0, 0);
-  this.desiredSep = 30; //desired separation between vehicles
+  this.desiredSep = 40; //desired separation between vehicles
   this.neighborDist = 100;
   //this.scl = 3;
   this.clr = "rgba(180,0,220,.8)";
   this.maxSpeed = 1;
-  this.maxForce = 1;
+  this.maxForce = 1.5;
 }
 
 //placing method in the prototype
@@ -30,20 +30,28 @@ Vehicle.prototype.update = function(){
 }
 
 Vehicle.prototype.checkEdges = function(){
-  let world = game.world;
-  if (this.loc.x > world.right){
-    this.loc.x = world.left;
+  // let world = game.world;
+  // if (this.loc.x > world.right){
+  //   this.loc.x = world.left;
+  // }
+  // else if(this.loc.x < world.left){
+  //   this.loc.x = world.right;
+  // }
+  // if(this.loc.y > world.top){
+  //   this.loc.y = world.bottom;
+  // }
+  // else if(this.loc.y < world.bottom){
+  //   this.loc.y = world.top;
+  // }
+
+    let world = game.world;
+    if(this.loc.x > world.right || this.loc.x < world.left){
+      this.vel.x = -this.vel.x;
+    }
+    if(this.loc.y > world.top || this.loc.y < world.bottom){
+      this.vel.y = -this.vel.y;
+    }
   }
-  else if(this.loc.x < world.left){
-    this.loc.x = world.right;
-  }
-  if(this.loc.y > world.top){
-    this.loc.y = world.bottom;
-  }
-  else if(this.loc.y < world.bottom){
-    this.loc.y = world.top;
-  }
-}
 
 Vehicle.prototype.render = function(){
   let ctx = game.context1;
