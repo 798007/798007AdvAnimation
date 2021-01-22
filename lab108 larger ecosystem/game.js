@@ -53,8 +53,8 @@ function Game(){
     let numMoons = 20;
     for(var i = 0; i < numMoons; i++){
         var x, y, dx, dy, clr, r, g, b;
-        x = Math.random()*(this.world.width - this.world.width/2);
-        y = Math.random()*(this.world.height - this.world.height/2);
+        x = Math.random()*this.world.width - this.world.width/2;
+        y = Math.random()*this.world.height - this.world.height/2;
         dx = Math.random()*6-3;
         dy = Math.random()*6-3;
         r = 255;
@@ -67,7 +67,7 @@ function Game(){
   this.vehicles = [];
       this.numVehicles = 30;
       for(let i = 0; i < this.numVehicles; i++){
-        this.vehicles.push(new Vehicle(new JSVector((Math.random()*(this.world.width - this.world.width/2)), (Math.random()*(this.world.height - this.world.height/2)))));
+        this.vehicles.push(new Vehicle(new JSVector(Math.random()*this.world.width - this.world.width/2, Math.random()*this.world.height - this.world.height/2)));
       }
 
   this.snakes = [];
@@ -161,8 +161,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
   for(var i = 0; i<numMovers;i++){
     var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
     radius = 30;
-    x = Math.random()*(this.world.width - this.world.width/2);
-    y = Math.random()*(this.world.height - this.world.height/2);
+    x = Math.random()*this.world.width - this.world.width/2;
+    y = Math.random()*this.world.height - this.world.height/2;
     dx = Math.random()*6-3;
     dy = Math.random()*6-3;
     // r = Math.random()*200+55;
@@ -178,8 +178,8 @@ Game.prototype.createMovers = function(canvas, numMovers){
 Game.prototype.createSnakes = function(canvas, numSnakes){
   for(var i = 0; i < numSnakes; i++){
     var x, y, dx, dy, r, g, b, clr, numSegments;
-    x = Math.random()*(this.world.width - this.world.width/2);
-    y = Math.random()*(this.world.height - this.world.height/2);
+    x = Math.random()*this.world.width - this.world.width/2;
+    y = Math.random()*this.world.height - this.world.height/2;
     dx = Math.random()*6-3;
     dy = Math.random()*6-3;
     r = Math.random()*200+55;
