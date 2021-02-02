@@ -23,7 +23,6 @@ class EcoSystem {
         //creating cells array
         this.cells = new Array(this.numRows);
 
-
         //load 2D cells array with Cell objects
         for(let r=0; r<this.cells.length; r++){
           this.cells[r] = new Array(this.numCols);
@@ -69,9 +68,27 @@ class EcoSystem {
         this.canvas1.addEventListener("click", function(event){
           let r = Math.floor((event.offsetY+ecoSystem.canvas1Loc.y-ecoSystem.world.top)/ecoSystem.cellHeight);
           let c = Math.floor((event.offsetX+ecoSystem.canvas1Loc.x-ecoSystem.world.left)/ecoSystem.cellWidth);
-          if((c>=0 && c<ecoSystem.numCols) && (r>=0 && r<ecoSystem.numRows)){
-            ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
+          ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
+          //load neighbors if cell is not occupied
+          if(!ecoSystem.cells[r][c].occupied){
+            ecoSystem.cells[r][c].loadNeighbors(ecoSystem.cells[r][c].neighbors);
+          }else{//remove neighbors if cell is occupied
+            ecoSystem.cells[r][c].neighbors = {
+              n: null,
+              ne: null,
+              e: null,
+              se: null,
+              s: null,
+              sw: null,
+              w: null,
+              nw: null
+            }
           }
+
+
+          // if((c>=0 && c<ecoSystem.numCols) && (r>=0 && r<ecoSystem.numRows)){
+          //   ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
+          // }
         });
     }//  +++++++++++++++++++++++++++++++++++++++++++++++++++  end Constructor
 
