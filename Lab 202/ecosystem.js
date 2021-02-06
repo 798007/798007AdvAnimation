@@ -37,6 +37,16 @@ class EcoSystem {
         }
         this.arrayLoaded = true;
 
+        this.loadNeighbors = function(){
+          for(let r=0; r<this.cells.length; r++){
+            for(let c=0; c<this.numCols; c++){
+              this.cells[r][c].loadNeighbors();
+            }
+          }
+        }
+
+        this.loadNeighbors();
+
         this.canvas1Loc = new JSVector(this.cells[0][0].loc.x, this.cells[0][0].loc.y);
         //actor
         this.actor = new Actor();
@@ -75,20 +85,8 @@ class EcoSystem {
           let c = Math.floor((event.offsetX+ecoSystem.canvas1Loc.x-ecoSystem.world.left)/ecoSystem.cellWidth);
           ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
           //load neighbors if cell is not occupied
-          if(!ecoSystem.cells[r][c].occupied){
-            ecoSystem.cells[r][c].loadNeighbors(ecoSystem.cells[r][c].neighbors);
-          }else{//remove neighbors if cell is occupied
-            ecoSystem.cells[r][c].neighbors = {
-              n: null,
-              ne: null,
-              e: null,
-              se: null,
-              s: null,
-              sw: null,
-              w: null,
-              nw: null
-            }
-          }
+          ecoSystem.loadNeighbors();
+
 
 
           // if((c>=0 && c<ecoSystem.numCols) && (r>=0 && r<ecoSystem.numRows)){

@@ -10,8 +10,8 @@ class Cell{
     this.y = row*this.height+this.ecosystem.world.top;
     this.loc = new JSVector(this.x, this.y);
 
-    this.neighbors = [];
-    this.neighbors.length = 8;
+    this.neighbors = {};
+    //this.neighbors.length = 8;
     this.occupied = occupied;
 
     // this.r = Math.random()*50;
@@ -22,7 +22,7 @@ class Cell{
 
   run(){
       this.render();
-      this.loadNeighbors(this.neighbors);
+      //this.loadNeighbors(this.neighbors);
   }
 
   render(){
@@ -48,58 +48,64 @@ class Cell{
 //the neighbors array is filled so that above is neighbors[0], above and to the right
 //is neighbors[1], to the right is neighbors[3], and so on in a clockwise motion up
 //to neighbors[7]
-  loadNeighbors(neighbors){
+  loadNeighbors(){
+    this.neighbors = {
+      n: null,
+      e: null,
+      s: null,
+      w: null
+    };
     let cells = this.ecosystem.cells;
     let r = this.row;
     let c = this.col;
     if(!this.occupied){
       if(r > 0){ //north
         if(!cells[r-1][c].occupied){
-          neighbors.n = cells[r-1][c];
+          this.neighbors.n = cells[r-1][c];
         }
       }
 
       if(c < this.ecosystem.numCols - 1){ //east
         if(!cells[r][c+1].occupied){
-          neighbors.e = cells[r][c+1];
+          this.neighbors.e = cells[r][c+1];
         }
       }
 
       if(r < this.ecosystem.numRows - 1){ //south
         if(!cells[r+1][c].occupied){
-          neighbors.s = cells[r+1][c];
+          this.neighbors.s = cells[r+1][c];
         }
       }
 
       if(c > 0){ //west
         if(!cells[r][c-1].occupied){
-          neighbors.w = cells[r][c-1];
+          this.neighbors.w = cells[r][c-1];
         }
       }
 
-      if(r > 0 && c < this.ecosystem.numCols - 1){ //northeast
-        if(!cells[r-1][c+1].occupied){
-          neighbors.ne = cells[r-1][c+1];
-        }
-      }
-
-      if(r < this.ecosystem.numRows - 1 && c < this.ecosystem.numCols - 1){ //southeast
-        if(!cells[r+1][c+1].occupied){
-          neighbors.se = cells[r+1][c+1];
-        }
-      }
-
-      if(r < this.ecosystem.numRows - 1 && c > 0){ //southwest
-        if(!cells[r+1][c-1].occupied){
-          neighbors.sw = cells[r+1][c-1];
-        }
-      }
-
-      if(r > 0 && c > 0){ //northwest
-        if(!cells[r-1][c-1].occupied){
-          neighbors.nw = cells[r-1][c-1];
-        }
-      }
+      // if(r > 0 && c < this.ecosystem.numCols - 1){ //northeast
+      //   if(!cells[r-1][c+1].occupied){
+      //     neighbors.ne = cells[r-1][c+1];
+      //   }
+      // }
+      //
+      // if(r < this.ecosystem.numRows - 1 && c < this.ecosystem.numCols - 1){ //southeast
+      //   if(!cells[r+1][c+1].occupied){
+      //     neighbors.se = cells[r+1][c+1];
+      //   }
+      // }
+      //
+      // if(r < this.ecosystem.numRows - 1 && c > 0){ //southwest
+      //   if(!cells[r+1][c-1].occupied){
+      //     neighbors.sw = cells[r+1][c-1];
+      //   }
+      // }
+      //
+      // if(r > 0 && c > 0){ //northwest
+      //   if(!cells[r-1][c-1].occupied){
+      //     neighbors.nw = cells[r-1][c-1];
+      //   }
+       }
     }
 
   //   if(this.ecosystem.arrayLoaded){
@@ -137,5 +143,5 @@ class Cell{
   //       }
   //     }
   //   }
-   }
+   //}
 }//  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Class
