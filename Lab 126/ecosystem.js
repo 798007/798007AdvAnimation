@@ -36,6 +36,17 @@ class EcoSystem {
         }
         this.arrayLoaded = true;
 
+        this.loadNeighbors = function(){
+        for(let r=0; r<this.cells.length; r++){
+          for(let c=0; c<this.numCols; c++){
+            this.cells[r][c].loadNeighbors();
+          }
+        }
+      }
+
+      this.loadNeighbors();
+
+
         // canvas2 is scaled according to the ratio of its
         // height and width to the height and width of the world
         // so that the entire world fits within canvas2
@@ -70,20 +81,21 @@ class EcoSystem {
           let c = Math.floor((event.offsetX+ecoSystem.canvas1Loc.x-ecoSystem.world.left)/ecoSystem.cellWidth);
           ecoSystem.cells[r][c].occupied = !ecoSystem.cells[r][c].occupied;
           //load neighbors if cell is not occupied
-          if(!ecoSystem.cells[r][c].occupied){
-            ecoSystem.cells[r][c].loadNeighbors(ecoSystem.cells[r][c].neighbors);
-          }else{//remove neighbors if cell is occupied
-            ecoSystem.cells[r][c].neighbors = {
-              n: null,
-              ne: null,
-              e: null,
-              se: null,
-              s: null,
-              sw: null,
-              w: null,
-              nw: null
-            }
-          }
+          ecoSystem.loadNeighbors();
+          // if(!ecoSystem.cells[r][c].occupied){
+          //   ecoSystem.cells[r][c].loadNeighbors(ecoSystem.cells[r][c].neighbors);
+          // }else{//remove neighbors if cell is occupied
+          //   ecoSystem.cells[r][c].neighbors = {
+          //     n: null,
+          //     ne: null,
+          //     e: null,
+          //     se: null,
+          //     s: null,
+          //     sw: null,
+          //     w: null,
+          //     nw: null
+          //   }
+          //}
 
 
           // if((c>=0 && c<ecoSystem.numCols) && (r>=0 && r<ecoSystem.numRows)){
