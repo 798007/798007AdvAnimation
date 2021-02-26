@@ -1,3 +1,4 @@
+
 // Actor class.  Each actor starts life at the beginning of a path
 // and follows that path to the end where it dies.
 
@@ -45,7 +46,7 @@ class Actor {
             this.loc = this.lastCell.center;
             this.lastCell.clr = "yellow"
           }
-          
+
     }
 
     render(){
