@@ -1,7 +1,8 @@
 class Tower {
-    constructor(game){
+    constructor(game, r, c){
         this.game = game;
-        this.loc = new JSVector(x, y);
+        this.loc = game.grid[r][c].loc;
+        //this.loc = new JSVector(x, y);
 
 
         // start off the actor in the first cell of the path
