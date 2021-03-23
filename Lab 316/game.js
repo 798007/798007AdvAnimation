@@ -52,6 +52,8 @@ function Game(){
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
+    setInterval(this.createParticle,200);     // use a timer to create 5 particles per second
+
 }//++++++++++++++++++++++  end Game constructor
 
 // function to run the game each animation cycle
@@ -78,6 +80,12 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.towers.length; i++){
          this.towers[i].run();
      }
-
-
 }
+
+//adds Particles with timer
+Game.prototype.createParticle = function(){
+  for(let i = 0; i < game.towers.length; i++){
+        game.towers[i].addParticle();
+      }
+    }
+      //setInterval(createParticle,200);     // use a timer to create 5 particles per second

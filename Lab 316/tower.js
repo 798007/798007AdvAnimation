@@ -11,7 +11,7 @@ class Tower {
     }
 
     run() {
-        this.addParticle();
+        //this.addParticle();
         this.update();
         this.render();
     }
@@ -30,15 +30,15 @@ class Tower {
     render(){
         let ctx = game.ctx;
         ctx.strokeStyle = "black";
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "purple";
         ctx.beginPath();
-        ctx.arc(this.loc.x + game.cellWidth/2, this.loc.y+ game.cellHeight/2, 8, 0, Math.PI*2);
+        ctx.arc(this.loc.x + game.cellWidth/2, this.loc.y+ game.cellHeight/2, 12, 0, Math.PI*2);
         ctx.fill();
         ctx.stroke();
     }
 
     addParticle(){
-      let rad = 6;
+      let rad = 4;
       let particleClr = "rgba(34, 235, 232)";
       this.particles.push(new Particle(this.emit.x, this.emit.y, rad, particleClr));
     }

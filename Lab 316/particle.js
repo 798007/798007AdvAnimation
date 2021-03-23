@@ -28,7 +28,7 @@ Particle.prototype.update = function(){
 
   //mover changes color when hitting particle
   for(let i = 0; i < game.actors.length; i++){
-      if(this.loc.distance(game.actors[i].location) < this.radius + game.actors[i].radius){
+      if(this.loc.distance(game.actors[i].loc) < this.radius + game.actors[i].radius){
         game.actors[i].clr = "rgba(255, 0, 0)"
       }
     }
@@ -38,11 +38,11 @@ Particle.prototype.update = function(){
 //draws particles on the canvas
 Particle.prototype.render = function(){
   let ctx = game.ctx;
-  ctx.strokeStyle = this.clr;
+  ctx.strokeStyle = "black";
   ctx.fillStyle = this.clr;
   ctx.save();
   ctx.beginPath();
-  ctx.arc(this.loc.x, this.loc.y, this.radius, Math.PI*2, 0, false);
+  ctx.arc(this.loc.x + game.cellWidth/2, this.loc.y + game.cellWidth/2, this.radius, Math.PI*2, 0, false);
   ctx.stroke();
   ctx.fill();
   ctx.restore();
