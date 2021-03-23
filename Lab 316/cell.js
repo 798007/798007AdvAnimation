@@ -44,12 +44,13 @@ class Cell {
 
     update() {
       let ctx = game.ctx;
-      if(this.occupied == true){
-        this.clr = "red";
-        //game.towers.push(new Tower(game, this.loc.x, this.loc.y));
-      }else{
-        this.clr = "rgba(50, 150, 120, 0.2)";
-      }
+      this.clr = "rgba(50, 150, 120, 0.2)";
+      // if(this.occupied == true){
+      //   this.clr = "red";
+      //   //game.towers.push(new Tower(game, this.loc.x, this.loc.y));
+      // }else{
+      //   this.clr = "rgba(50, 150, 120, 0.2)";
+      // }
       ctx.fillStyle = this.clr;
       ctx.strokeStyle = "black";
       ctx.stroke();

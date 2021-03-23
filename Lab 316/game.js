@@ -32,7 +32,7 @@ function Game(){
         let r = Math.floor((event.offsetY)/game.cellHeight);
         let c = Math.floor((event.offsetX)/game.cellWidth);
         if(!game.grid[r][c].occupied){
-            game.towers.push(new Tower(this, r, c));
+            game.towers.push(new Tower(game, r, c));
         }
         //this.towers.push(new Tower(this, r, c));
         game.grid[r][c].occupied = !game.grid[r][c].occupied;
@@ -51,17 +51,6 @@ function Game(){
     // Additional actors may be created periodically.
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
-
-  //  this.towers = [];
-    //this.createTower();
-
-    //adds Particles with timer
-    // function createParticle(){
-    //   for(let i = 0; i < game.towers.length; i++){
-    //     game.towers[i].addParticle();
-    //   }
-    // }
-    //   setInterval(createParticle,200);     // use a timer to create 5 particles per second
 
 }//++++++++++++++++++++++  end Game constructor
 

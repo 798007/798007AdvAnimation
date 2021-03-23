@@ -4,6 +4,7 @@ class Tower {
         this.r = r;
         this.c = c;
         this.loc = game.grid[r][c].loc;
+        this.particleSystem = new ParticleSystem(this, this.r, this.c)
         //this.loc = new JSVector(x, y);
 
 
@@ -24,6 +25,7 @@ class Tower {
     run() {
         //this.update();
         this.render();
+        this.particleSystem.run(this.r, this.c);
     }
 
     render(){
@@ -31,9 +33,13 @@ class Tower {
         ctx.strokeStyle = "black";
         ctx.fillStyle = "blue";
         ctx.beginPath();
-        ctx.arc(this.loc.x, this.loc.y, 8, 0, Math.PI*2);
+        ctx.arc(this.loc.x + game.cellWidth/2, this.loc.y+ game.cellHeight/2, 8, 0, Math.PI*2);
         ctx.fill();
         ctx.stroke();
+    }
+
+    addParticle(){
+      this.particleSystem.addParticle();
     }
 }
 
