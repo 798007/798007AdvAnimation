@@ -3,29 +3,30 @@ class Tower {
         this.game = game;
         this.r = r;
         this.c = c;
+        //this.loc = new JSVector(r, c);
         this.loc = game.grid[r][c].loc;
-        this.particleSystem = new ParticleSystem(this, this.r, this.c)
-        //this.loc = new JSVector(x, y);
-
-
-        // start off the actor in the first cell of the path
-        // this.pathIndex = 0;
-        // this.currentCell = game.path[this.pathIndex];
-        // this.nextCell = game.path[this.pathIndex+1];   // next in the path of cells
-        // // where this actor should aim -- the center of the next cell in the path
-        // this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
-        //                     this.nextCell.loc.y + this.nextCell.height/2);
-        // this.lastCell = game.path[game.path.length-1];  // end of the path
-        // // position the actor initially in the center of the first cell
-        // this.loc = new JSVector(this.currentCell.loc.x + this.currentCell.width/2,
-        //                         this.currentCell.loc.y + this.currentCell.height/2);
+        this.particles = [];
+        this.emit = new JSVector(this.loc.x, this.loc.y);
 
     }
 
     run() {
-        //this.update();
+        this.addParticle();
+        this.update();
         this.render();
-        this.particleSystem.run(this.r, this.c);
+        this.particleSystem.run(this.loc.x, this.loc.y);
+        //this.particleSystem.run(this.r, this.c);
+    }
+
+    update(){
+      for(let i = this.particles.length-1; i >= 0; i--){
+        let p = this.particles[i];
+        this.emit = new JSVector(this.loc.x, this.loc.y);
+        p.run();
+        if(p.isDead() == true){
+          this.particles.splice(i, 1); //delete dead particles
+        }
+      }
     }
 
     render(){
@@ -39,42 +40,8 @@ class Tower {
     }
 
     addParticle(){
-      this.particleSystem.addParticle();
+      let rad = 6;
+      let particleClr = "rgba(34, 235, 232)";
+      this.particles.push(new Particle(this.emit.x, this.emit.y, rad, particleClr));
     }
 }
-
-
-
-
-
-
-// function Tower(x, y, clr){
-//   this.location = new JSVector(x, y)
-//   this.clr = clr;
-//   this.particleSystem = new ParticleSystem(this.location.x, this.location.y);
-// }
-//
-// Tower.prototype.run = function(){
-//   this.particlesystem.run(this.location.x, this.location.y);
-//   this.render();
-// }
-//
-// Tower.prototype.render = function(){
-//   let ctx = game.ctx;
-//   ctx.strokeStyle = this.clr;
-//   ctx.fillStyle = this.clr;
-//   ctx.save();
-//   ctx.beginPath();
-//   ctx.moveTo(10, 0);
-//   ctx.lineTo(-10, -5);
-//   ctx.lineTo(-10, 5);
-//   ctx.closePath();
-//   // ctx.arc(this.segments[i].x, this.segments[i].y, this.rad, Math.PI*2, 0, false);
-//   ctx.stroke();
-//   ctx.fill();
-//   ctx.restore();
-// }
-//
-// Tower.prototype.addParticle = function(){
-//   this.particleSystem.addParticle();
-// }
