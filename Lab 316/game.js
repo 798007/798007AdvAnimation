@@ -31,9 +31,9 @@ function Game(){
     this.canvas.addEventListener("click", function(event){
         let r = Math.floor((event.offsetY)/game.cellHeight);
         let c = Math.floor((event.offsetX)/game.cellWidth);
-        // if(!game.grid[r][c].occupied){
-        //     this.towers.push(new Tower(this, r, c));
-        // }
+        if(!game.grid[r][c].occupied){
+            game.towers.push(new Tower(this, r, c));
+        }
         //this.towers.push(new Tower(this, r, c));
         game.grid[r][c].occupied = !game.grid[r][c].occupied;
     });

@@ -1,6 +1,8 @@
 class Tower {
     constructor(game, r, c){
         this.game = game;
+        this.r = r;
+        this.c = c;
         this.loc = game.grid[r][c].loc;
         //this.loc = new JSVector(x, y);
 
