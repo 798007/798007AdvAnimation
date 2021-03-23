@@ -14,8 +14,6 @@ class Tower {
         this.addParticle();
         this.update();
         this.render();
-        this.particleSystem.run(this.loc.x, this.loc.y);
-        //this.particleSystem.run(this.r, this.c);
     }
 
     update(){
