@@ -17,10 +17,12 @@ class Actor {
                                 this.currentCell.loc.y + this.currentCell.height/2);
         this.vel = new JSVector(0,0);   // velocity
         this.acc = new JSVector(0, 0);
+        this.clr = "green";
         this.maxSpeed = 1.25;
         this.orbitAngle = Math.random()*Math.PI;
         this.orbitclr = "green";
         this.orbiters = [];
+        //this.count = 0;
 
         //create all orbiters
         for(let i = 0; i<5; i++){
@@ -64,7 +66,8 @@ class Actor {
     render(){
         let ctx = game.ctx;
         ctx.strokeStyle = "black";
-        ctx.fillStyle = "green";
+        ctx.fillStyle = this.clr;
+        //ctx.fillStyle = "green";
         ctx.beginPath();
         ctx.arc(this.loc.x, this.loc.y, 8, 0, Math.PI*2);
         ctx.fill();

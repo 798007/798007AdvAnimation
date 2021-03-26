@@ -39,7 +39,7 @@ class Tower2 {
 
     addParticle(){
       let rad = 4;
-      let particleClr = "purple";
+      let particleClr = "yellow";
       this.particles2.push(new Particle2(this.emit.x, this.emit.y, rad, particleClr));
     }
 }

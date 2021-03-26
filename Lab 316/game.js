@@ -33,7 +33,7 @@ function Game(){
         let c = Math.floor((event.offsetX)/game.cellWidth);
         if(!game.grid[r][c].occupied){
             let n = Math.random() * 10;
-            if(n < 5){
+            if(n < 6){
               game.towers.push(new Tower(game, r, c));
             }else{
               game.towers.push(new Tower2(game, r, c));
@@ -58,6 +58,8 @@ function Game(){
     this.actors.push(new Actor(this));  // one actor initially
 
     setInterval(this.createParticle,500);     // use a timer to create 2 particles per second
+    //setInterval(this.createParticle2,1000);
+    setInterval(this.addActor, 5000);
 
 }//++++++++++++++++++++++  end Game constructor
 
@@ -94,3 +96,13 @@ Game.prototype.createParticle = function(){
       }
     }
       //setInterval(createParticle,200);     // use a timer to create 5 particles per second
+
+// Game.prototype.createParticle2 = function(){
+//   for(let i = 0; i < game.towers.length; i++){
+//         game.towers[i].addParticle2();
+//       }
+//     }
+
+Game.prototype.addActor = function(){
+  game.actors.push(new Actor(game));
+}

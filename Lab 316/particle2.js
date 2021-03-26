@@ -2,7 +2,7 @@ function Particle2(x, y, rad, clr){
   this.loc = new JSVector(x, y);
   this.vel = new JSVector(Math.random()*3-1, Math.random()*3-1);
   //this.acc = new JSVector(0, 0.07);
-  this.lifeSpan = 500;
+  this.lifeSpan = 200;
   this.radius = rad;
   this.clr = clr;
 }
@@ -22,7 +22,10 @@ Particle2.prototype.update = function(){
       let orb = game.actors[i].orbiters[j];
       if(this.loc.distance(orb.location) < this.radius + orb.radius){
         this.lifeSpan = -1;
-        orb.orbitclr = "blue";
+        game.actors[i].clr = "blue";
+        //game.actors[i].vel.limit(game.actors[i].maxSpeed/4);
+        game.actors[i].maxSpeed = game.actors[i].maxSpeed/1.5;
+        //orb.clr = "blue";
       }
     }
   }
