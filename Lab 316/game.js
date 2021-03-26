@@ -57,7 +57,7 @@ function Game(){
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
-    setInterval(this.createParticle,200);     // use a timer to create 5 particles per second
+    setInterval(this.createParticle,500);     // use a timer to create 2 particles per second
 
 }//++++++++++++++++++++++  end Game constructor
 

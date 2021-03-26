@@ -5,7 +5,7 @@ class Tower2 {
         this.c = c;
         //this.loc = new JSVector(r, c);
         this.loc = game.grid[r][c].loc;
-        this.particles = [];
+        this.particles2 = [];
         this.emit = new JSVector(this.loc.x, this.loc.y);
 
     }
@@ -17,12 +17,12 @@ class Tower2 {
     }
 
     update(){
-      for(let i = this.particles.length-1; i >= 0; i--){
-        let p = this.particles[i];
+      for(let i = this.particles2.length-1; i >= 0; i--){
+        let p = this.particles2[i];
         this.emit = new JSVector(this.loc.x, this.loc.y);
         p.run();
         if(p.isDead() == true){
-          this.particles.splice(i, 1); //delete dead particles
+          this.particles2.splice(i, 1); //delete dead particles
         }
       }
     }
@@ -40,6 +40,6 @@ class Tower2 {
     addParticle(){
       let rad = 4;
       let particleClr = "purple";
-      this.particles.push(new Particle(this.emit.x, this.emit.y, rad, particleClr));
+      this.particles2.push(new Particle2(this.emit.x, this.emit.y, rad, particleClr));
     }
 }

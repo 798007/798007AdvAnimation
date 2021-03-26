@@ -1,4 +1,4 @@
-function Particle(x, y, rad, clr){
+function Particle2(x, y, rad, clr){
   this.loc = new JSVector(x, y);
   this.vel = new JSVector(Math.random()*3-1, Math.random()*3-1);
   //this.acc = new JSVector(0, 0.07);
@@ -7,12 +7,12 @@ function Particle(x, y, rad, clr){
   this.clr = clr;
 }
 
-Particle.prototype.run = function(){
+Particle2.prototype.run = function(){
   this.update();
   this.render();
 }
 
-Particle.prototype.update = function(){
+Particle2.prototype.update = function(){
   //this.vel.add(this.acc);
   this.loc.add(this.vel);
 
@@ -22,22 +22,22 @@ Particle.prototype.update = function(){
       let orb = game.actors[i].orbiters[j];
       if(this.loc.distance(orb.location) < this.radius + orb.radius){
         this.lifeSpan = -1;
-        orb.orbitclr = "red";
+        orb.orbitclr = "blue";
       }
     }
   }
 
   //mover changes color when hitting particle
-  for(let i = 0; i < game.actors.length; i++){
-      if(this.loc.distance(game.actors[i].loc) < this.radius + game.actors[i].radius){
-        game.actors[i].clr = "rgba(255, 0, 0)"
-      }
-    }
-  this.lifeSpan = this.lifeSpan-2;
+  // for(let i = 0; i < game.actors.length; i++){
+  //     if(this.loc.distance(game.actors[i].loc) < this.radius + game.actors[i].radius){
+  //       game.actors[i].clr = "rgba(255, 0, 0)"
+  //     }
+  //   }
+  // this.lifeSpan = this.lifeSpan-2;
 }
 
 //draws particles on the canvas
-Particle.prototype.render = function(){
+Particle2.prototype.render = function(){
   let ctx = game.ctx;
   ctx.strokeStyle = "black";
   ctx.fillStyle = this.clr;
@@ -50,7 +50,7 @@ Particle.prototype.render = function(){
 }
 
 //when a particle is dead, it will disappear from the canvas
-Particle.prototype.isDead = function(){
+Particle2.prototype.isDead = function(){
   if(this.lifeSpan < 0){
     return true;
   }else{
