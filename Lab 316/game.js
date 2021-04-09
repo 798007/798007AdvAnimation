@@ -33,11 +33,13 @@ function Game(){
         let c = Math.floor((event.offsetX)/game.cellWidth);
         if(!game.grid[r][c].occupied){
             let n = Math.random() * 10;
-            if(n < 6){
-              game.towers.push(new Tower(game, r, c));
-            }else{
-              game.towers.push(new Tower2(game, r, c));
-            }
+            //if(n >= 0 && n < 2){
+            //  game.towers.push(new Tower(game, r, c));
+          //  }else if(n>=2 && n < 4){
+          //    game.towers.push(new Tower2(game, r, c));
+          //  }else{
+              game.towers.push(new Tower3(game, r, c));
+          //  }
         }
         //this.towers.push(new Tower(this, r, c));
         game.grid[r][c].occupied = !game.grid[r][c].occupied;
