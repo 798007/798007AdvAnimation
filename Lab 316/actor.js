@@ -22,6 +22,8 @@ class Actor {
         this.orbitAngle = Math.random()*Math.PI;
         this.orbitclr = "green";
         this.orbiters = [];
+        this.frozen = false;
+        this.timer = 0;
         //this.count = 0;
 
         //create all orbiters
@@ -47,7 +49,7 @@ class Actor {
     update(){
         // move this actor along the path until it reaches the end of
         // the path and dies
-        if(this.currentCell!=this.lastCell){
+        if(this.currentCell!=this.lastCell && !this.frozen){
           let dist = this.loc.distance(this.target);
           this.acc = JSVector.subGetNew(this.target, this.loc);
           this.acc.limit(0.1);
@@ -59,6 +61,12 @@ class Actor {
             this.currentCell = this.game.path[this.pathIndex];
             this.nextCell = this.game.path[this.pathIndex+1];
             this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
+          }
+        }else if(this.frozen){
+          this.countdown--;
+          if(this.countdown == 0){
+            this.frozen = false;
+            this.clr = "green"
           }
         }
     }

@@ -25,7 +25,9 @@ Particle3.prototype.update = function(){
         game.actors[i].clr = "black";
         //game.actors[i].vel.limit(game.actors[i].maxSpeed/4);
         //setInterval(this.stopActor, 3000);
-        game.actors[i].maxSpeed = 0;
+        game.actors[i].frozen = true;
+        game.actors[i].countdown = 3*60;
+        //game.actors[i].maxSpeed = 0;
         //orb.clr = "blue";
       }
     }
