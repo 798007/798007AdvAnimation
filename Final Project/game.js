@@ -1,9 +1,10 @@
 function Game(){
+
     this.ga = new GameArea();   // create all the dom elements
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
-    this.canvasLoc = new JSVector();
+
     // get the context
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
@@ -14,38 +15,15 @@ function Game(){
     this.numRows = 13;
     this.cellHeight = this.canvas.height / this.numRows;
 
-
     // Create the two-dimensional grid of cells
     this.grid = new Array(this.numRows);
     // Populate the grid of cells
     for (let r = 0; r < this.grid.length; r++) {
         this.grid[r] = new Array(this.numCols);
         for (let c = 0; c < this.grid[r].length; c++) {
-            this.grid[r][c] = new Cell(this, r, c, false);
+            this.grid[r][c] = new Cell(this, r, c);
         }
     }
-
-    this.actors = [];
-    this.actors.push(new Actor(this)); 
-    //create an array of towers
-    this.towers = [];
-
-    this.canvas.addEventListener("click", function(event){
-        let r = Math.floor((event.offsetY)/game.cellHeight);
-        let c = Math.floor((event.offsetX)/game.cellWidth);
-        if(!game.grid[r][c].occupied){
-            let n = Math.random() * 10;
-            //if(n >= 0 && n < 2){
-            //  game.towers.push(new Tower(game, r, c));
-          //  }else if(n>=2 && n < 4){
-          //    game.towers.push(new Tower2(game, r, c));
-          //  }else{
-              game.towers.push(new Tower3(game, r, c));
-          //  }
-        }
-        //this.towers.push(new Tower(this, r, c));
-        game.grid[r][c].occupied = !game.grid[r][c].occupied;
-    });
 
     // Create a path for the actors to follow.
     // The path is an array of cells as specified in a separate file.
@@ -61,8 +39,27 @@ function Game(){
     this.actors = [];
     this.actors.push(new Actor(this));  // one actor initially
 
-    setInterval(this.createParticle,1000);     // use a timer to create 2 particles per second
-    //setInterval(this.createParticle2,1000);
+    this.towers = [];
+
+    this.canvas.addEventListener("click", function(event){
+      let r = Math.floor((event.offsetY)/game.cellHeight);
+      let c = Math.floor((event.offsetX)/game.cellWidth);
+      if(!game.grid[r][c].occupied){
+          //let n = Math.random() * 10;
+          //if(n >= 0 && n < 2){
+            game.towers.push(new Tower(game, r, c));
+        //  }else if(n>=2 && n < 4){
+        //    game.towers.push(new Tower2(game, r, c));
+        //  }else{
+          //  game.towers.push(new Tower3(game, r, c));
+        //  }
+      }
+      //this.towers.push(new Tower(this, r, c));
+      game.grid[r][c].occupied = !game.grid[r][c].occupied;
+  });
+
+    setInterval(this.createParticle,1000);
+
     setInterval(this.addActor, 5000);
 
 }//++++++++++++++++++++++  end Game constructor
@@ -87,7 +84,6 @@ Game.prototype.run = function(){
     for(let i = 0; i < this.actors.length; i++){
         this.actors[i].run();
     }
-
     for(let i = 0; i < this.towers.length; i++){
          this.towers[i].run();
      }
@@ -99,13 +95,6 @@ Game.prototype.createParticle = function(){
         game.towers[i].addParticle();
       }
     }
-      //setInterval(createParticle,200);     // use a timer to create 5 particles per second
-
-// Game.prototype.createParticle2 = function(){
-//   for(let i = 0; i < game.towers.length; i++){
-//         game.towers[i].addParticle2();
-//       }
-//     }
 
 Game.prototype.addActor = function(){
   game.actors.push(new Actor(game));
